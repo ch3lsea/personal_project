@@ -4,17 +4,21 @@
         <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="/stylesheets/style.css">
     </head>
-    <body ng-controller="IndexController">
-        <div class="navbar navbar-fixed-top">
-            <div class="container-fluid">
-                <ul class="nav nav-pills">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li ng-show="auth"><a href="#blogPost">Create New Post</a></li>
-                    <li class="lastC"><a href="#login">Log In</a></li>
-                </ul>
+    <body>
+
+        <nav ng-controller="BlogController">
+            <div class="navbar navbar-fixed-top">
+                <div class="container-fluid">
+                    <ul class="nav nav-pills">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li ng-show="auth"><a href="#blogPost">Create New Post</a></li>
+                        <li ng-show="!auth" class="lastC"><a href="#login">Log In</a></li>
+                        <li ng-show="auth" class="lastC"><a href="#login">Log Out</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </nav>
         <main ng-view></main>
         <!--Scripts-->
         <script type="text/javascript" src="/vendor/angular/angular.min.js"></script>

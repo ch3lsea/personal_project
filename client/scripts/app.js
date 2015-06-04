@@ -1,31 +1,11 @@
-var app = angular.module('app',["ngRoute", "ngResource"]);
+//var app = angular.module('app',["ngRoute", "ngResource"]);
+var app = angular.module('app',["ngRoute", "ngResource"]);//trying it without resource
 
-app.config(['$routeProvider', '$httpProvider',
+app.config(['$routeProvider', '$httpProvider', '$locationProvider',
     function($routeProvider, $httpProvider) {
 
-    var checkLoggedin = ['$q', '$http', '$location', '$rootScope', function($q, $http, $location, $rootScope){
-        // Initialize a new promise
-        var deferred = $q.defer();
 
-        // Make an AJAX call to check if the user is logged in
-        $http.get('/login/loggedin').success(function(user){
-            // Authenticated
-            if (user !== '0') {
-                $scope.auth = true;
-                deferred.resolve();
-            }
-            // Not Authenticated
-            else {
-                $rootScope.message = 'You need to log in.';
-                deferred.reject();
-                $location.url('/login');
-            }
-        });
-
-        return deferred.promise;
-    }];
-
-    $httpProvider.interceptors.push([ '$q', '$location',function($q, $location) {
+    $httpProvider.interceptors.push(['$q', '$location',function($q, $location) {
         return {
             response: function(response) {
                 // do something on success
@@ -47,21 +27,41 @@ app.config(['$routeProvider', '$httpProvider',
             templateUrl: "/views/routes/blog.html"
         }).
         when('/blogPost', {
-            templateUrl: "../views/routes/blogPost.html",
-            resolve: {
-                loggedin: checkLoggedin
-            }
+            templateUrl: "../views/routes/blogPost.html"
         }).
         when('/login', {
             templateUrl: "/views/routes/login.html",
             controller: "LoginCtrl"
+            //resolve: {
+            //    loggedin: checkAuth
+            //}
         }).
         otherwise({
             redirectTo: "/home"
         });
 }]);
 
-app.controller("IndexController", ['$scope', '$http', function($scope, $http){
+app.run(['$rootScope', '$http', function($rootScope, $http){
+    $rootScope.checkAuth = function(){
+        console.log("rootScope things are happening");
+        // Make an AJAX call to check if the user is logged in
+        $http.get('/login/loggedin').success(function(user){
+            // Authenticated
+            if (user !== '0') {
+                console.log('Authenticated');
+                return true;
+            }
+            // Not Authenticated
+            else {
+                console.log('Not Authenticated');
+                return false;
+            }
+        });
+    };
+
+}]);
+//
+app.controller("BlogController", ['$scope', '$http', function($scope, $http){
     //$scope.bPost = {};
     //$scope.posts = [];
     //var fetchPosts = function() {
@@ -85,6 +85,4 @@ app.controller("IndexController", ['$scope', '$http', function($scope, $http){
     //        return $http.post('/posts', bPost).then(fetchPosts());
     //    }
     //};
-    console.log('index controller is working');
-
 }]);
