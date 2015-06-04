@@ -24,8 +24,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(session({
+  secret: 'stuff',
+  resave: true,
+  saveUninitialized: false
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
@@ -37,9 +41,31 @@ app.use(
     }
 );
 
-app.use('/', routes);
-app.use('/posts', posts);
-app.use('/login', login);
+
+//===========================================================
+//Passport set up
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+var globalAdmin = { id: 1234, name: 'admin'};
+
+passport.serializeUser(function(user, done) {
+  return done(null, user.name);
+});
+
+passport.deserializeUser(function(id, done) {
+  return done(null, globalAdmin);
+});
+
+passport.use('local',new LocalStrategy(
+    function(username, password, done) {
+      if (username === "admin" && password === "admin")
+        return done(null, globalAdmin);
+
+      return done(null, false, { message: 'Incorrect username.' });
+    }
+));
 
 //===========================================================
 //MongoDB Set-up
@@ -54,27 +80,11 @@ MongoDB.once('open', function () {
   console.log('mongodb connection open');
 });
 
-//===========================================================
-//Passport set up
-passport.serializeUser(function(user, done) {
-  done(null, user.name);
-});
+app.use('/', routes);
+app.use('/posts', posts);
+app.use('/login', login);
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err,user){
-    if(err) done(err);
-    done(null,user);
-  });
-});
 
-passport.use('local',new LocalStrategy(
-    function(username, password, done) {
-      if (username === "admin" && password === "Chadr7FR**")
-        return done(null, {name: "admin"});
-
-      return done(null, false, { message: 'Incorrect username.' });
-    }
-));
 
 //===========================================================
 // catch 404 and forward to error handler

@@ -12,9 +12,9 @@
                     <ul class="nav nav-pills">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#blog">Blog</a></li>
-                        <li ng-show="auth"><a href="#blogPost">Create New Post</a></li>
-                        <li ng-show="!auth" class="lastC"><a href="#login">Log In</a></li>
-                        <li ng-show="auth" class="lastC"><a href="#login">Log Out</a></li>
+                        <li ng-show="loggedin"><a href="#blogPost">Create New Post</a></li>
+                        <li ng-show="!loggedin" class="lastC"><a href="#login">Log In</a></li>
+                        <li ng-show="loggedin" ng-click="logout()" class="lastC"><a href="#/">Log Out</a></li>
                     </ul>
                 </div>
             </div>

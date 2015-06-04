@@ -45,18 +45,27 @@ app.run(['$rootScope', '$http', function($rootScope, $http){
     $rootScope.checkAuth = function(){
         console.log("rootScope things are happening");
         // Make an AJAX call to check if the user is logged in
-        $http.get('/login/loggedin').success(function(user){
+        $http.get('/login/loggedin').success(function(data, status, headers, config){
             // Authenticated
-            if (user !== '0') {
+            if (data !== '0') {
+                console.log(data);
                 console.log('Authenticated');
-                return true;
+                $rootScope.loggedin = true;
             }
             // Not Authenticated
             else {
                 console.log('Not Authenticated');
-                return false;
+                $rootScope.loggedin = false;
             }
+        }).error(function(data, status, headers, config){
+            console.log(data, status);
         });
+    };
+    $rootScope.logout = function(){
+        console.log("logged out rootscope worked");
+        $rootScope.message = 'Logged out.';
+        $http.post('/login/logout');
+        return $rootScope.checkAuth();
     };
 
 }]);

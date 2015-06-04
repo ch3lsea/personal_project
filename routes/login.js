@@ -5,10 +5,19 @@ var passport = require('passport');
 
 /* GET home page. */
 router.post('/', passport.authenticate('local'), function(req, res) {
+    console.log(req.isAuthenticated());
+    console.log(req.user);
     res.send(req.user);
 });
 
 router.get('/loggedin', function(req, res) {
+    console.log('checking logged in');
+    console.log(req.isAuthenticated());
+    res.send(req.isAuthenticated() ? req.user : '0');
+});
+
+router.post('/logout', function(req, res) {
+    req.logout();
     res.send(req.isAuthenticated() ? req.user : '0');
 });
 
