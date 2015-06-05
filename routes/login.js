@@ -3,7 +3,6 @@ var router = express.Router();
 var path = require('path');
 var passport = require('passport');
 
-/* GET home page. */
 router.post('/', passport.authenticate('local'), function(req, res) {
     console.log(req.isAuthenticated());
     console.log(req.user);

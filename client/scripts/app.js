@@ -27,14 +27,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
             templateUrl: "/views/routes/blog.html"
         }).
         when('/blogPost', {
-            templateUrl: "../views/routes/blogPost.html"
+            templateUrl: "/views/routes/blogPost.html"
         }).
         when('/login', {
             templateUrl: "/views/routes/login.html",
             controller: "LoginCtrl"
-            //resolve: {
-            //    loggedin: checkAuth
-            //}
         }).
         otherwise({
             redirectTo: "/home"

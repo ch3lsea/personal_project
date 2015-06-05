@@ -30,18 +30,6 @@ app.use(session({
   saveUninitialized: false
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(
-    function(req,res,next) {
-      if (!req.isAuthenticated())
-        next();
-      else
-        express.static(path.join(__dirname, 'private'));
-    }
-);
-
-
 //===========================================================
 //Passport set up
 
@@ -67,6 +55,20 @@ passport.use('local',new LocalStrategy(
     }
 ));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req,res,next) {
+      if (!req.isAuthenticated()){
+        console.log('no auth', req.isAuthenticated());
+        next();}
+      else {
+        console.log(path.join(__dirname, 'private'));
+        express.static(path.join(__dirname, 'private'));
+        next();
+      }
+    }
+);
+
 //===========================================================
 //MongoDB Set-up
 var mongoURI = "mongodb://localhost:27017/personal_project";
@@ -83,8 +85,6 @@ MongoDB.once('open', function () {
 app.use('/', routes);
 app.use('/posts', posts);
 app.use('/login', login);
-
-
 
 //===========================================================
 // catch 404 and forward to error handler
