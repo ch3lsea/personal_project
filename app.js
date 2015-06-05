@@ -15,6 +15,7 @@ var schema = require('./models/schema');
 var routes = require('./routes/index');
 var posts = require('./routes/posts');
 var login = require('./routes/login');
+var privateFiles = require('./routes/privateFiles');
 
 var app = express();
 
@@ -57,18 +58,6 @@ passport.use('local',new LocalStrategy(
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req,res,next) {
-      if (!req.isAuthenticated()){
-        console.log('no auth', req.isAuthenticated());
-        next();}
-      else {
-        console.log(path.join(__dirname, 'private'));
-        express.static(path.join(__dirname, 'private'));
-        next();
-      }
-    }
-);
-
 //===========================================================
 //MongoDB Set-up
 var mongoURI = "mongodb://localhost:27017/personal_project";
@@ -85,6 +74,7 @@ MongoDB.once('open', function () {
 app.use('/', routes);
 app.use('/posts', posts);
 app.use('/login', login);
+app.use('/private', privateFiles);
 
 //===========================================================
 // catch 404 and forward to error handler

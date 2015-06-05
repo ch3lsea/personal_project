@@ -24,10 +24,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
             templateUrl: "/views/routes/home.html"
         }).
         when('/blog', {
-            templateUrl: "/views/routes/blog.html"
+            templateUrl: "/views/routes/blog.html",
+            controller: "BlogController"
         }).
         when('/blogPost', {
-            templateUrl: "/views/routes/blogPost.html"
+            templateUrl: "/private/views/routes/blogPost.html"
         }).
         when('/login', {
             templateUrl: "/views/routes/login.html",
@@ -40,12 +41,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
 
 app.run(['$rootScope', '$http', function($rootScope, $http){
     $rootScope.checkAuth = function(){
-        console.log("rootScope things are happening");
         // Make an AJAX call to check if the user is logged in
         $http.get('/login/loggedin').success(function(data, status, headers, config){
             // Authenticated
             if (data !== '0') {
-                console.log(data);
                 console.log('Authenticated');
                 $rootScope.loggedin = true;
             }
@@ -59,7 +58,6 @@ app.run(['$rootScope', '$http', function($rootScope, $http){
         });
     };
     $rootScope.logout = function(){
-        console.log("logged out rootscope worked");
         $rootScope.message = 'Logged out.';
         $http.post('/login/logout');
         return $rootScope.checkAuth();
@@ -68,27 +66,26 @@ app.run(['$rootScope', '$http', function($rootScope, $http){
 }]);
 //
 app.controller("BlogController", ['$scope', '$http', function($scope, $http){
-    //$scope.bPost = {};
-    //$scope.posts = [];
-    //var fetchPosts = function() {
-    //    return $http.get('/posts').then(function(response){
-    //        if(response.status !== 200){
-    //            throw new Error('Failed to fetch posts from the API');
-    //        }
-    //        $scope.bPost = {};
-    //        $scope.posts = response.data;
-    //        console.log(response.data);
-    //        return response.data;
-    //    })
-    //};
-    //
-    //fetchPosts();
-    //
-    //$scope.add = function(bPost){
-    //    if(!$scope.bPost.title || !$scope.bPost.content) {
-    //        alert("You missed a section there");
-    //    } else {
-    //        return $http.post('/posts', bPost).then(fetchPosts());
-    //    }
-    //};
+    $scope.bPost = {};
+    $scope.posts = [];
+    var fetchPosts = function() {
+        return $http.get('/posts').then(function(response){
+            if(response.status !== 200){
+                throw new Error('Failed to fetch posts from the API');
+            }
+            $scope.bPost = {};
+            $scope.posts = response.data;
+            return response.data;
+        })
+    };
+
+    fetchPosts();
+
+    $scope.add = function(bPost){
+        if(!$scope.bPost.title || !$scope.bPost.content) {
+            alert("You missed a section there");
+        } else {
+            return $http.post('/posts', bPost).then(fetchPosts());
+        }
+    };
 }]);

@@ -1,10 +1,10 @@
 <h1>Blog</h1>
-<!--<div ng-repeat="bPost in posts | orderBy: '-date'" class="display col-md-8 col-md-offset-2 text-center">-->
-    <!--<h3>{{bPost.title}}</h3>-->
-    <!--<p>{{bPost.content}}</p>-->
-    <!--<p>{{bPost.date | date: 'mediumDate'}}</p>-->
-    <!--<div ng-show="auth">-->
-        <!--<button class="btn">Edit</button>-->
-        <!--<button class="btn">Delete</button>-->
-    <!--</div>-->
-<!--</div>-->
+<div ng-repeat="bPost in posts | orderBy: '-date'" class="display col-md-8 col-md-offset-2 text-center">
+    <h3>{{bPost.title}}</h3>
+    <p>{{bPost.content}}</p>
+    <p>{{bPost.date | date: 'mediumDate'}}</p>
+    <div ng-show="auth">
+        <button class="btn">Edit</button>
+        <button class="btn">Delete</button>
+    </div>
+</div>
