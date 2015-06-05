@@ -8,7 +8,6 @@ var Schema = require('../models/schema');
 router.get('/', function(req, res, next) {
   Schema.find(function(err, posts) {
     res.json(posts);
-    console.log(posts);
   });
 });
 
@@ -17,7 +16,6 @@ router.post("/", function(req,res,next){
   //check auth
   Schema.create(req.body, function(err, bPost){
     res.json(bPost);
-    console.log(bPost);
   })
 });
 

@@ -1,10 +1,13 @@
 <div ng-controller="BlogController">
-    <h1>New Post</h1>
-    <form>
-        <label for="title">Title:</label><br>
-        <input ng-model="bPost.title" type="text" name="title" id="title"/><br>
-        <label for="textarea">New Post Content:</label><br>
-        <textarea ng-model="bPost.content" type="textarea" name="textarea" id="textarea"></textarea><br>
-        <input type="submit" ng-click="add(bPost)" id="submit" addvalue="Submit"/>
-    </form>
+    <div class="spacing">
+        <h1>New Post</h1>
+        <h3>Need to add a WYSIWYG so this is more user friendly, but that's internal-facing anyway.</h3>
+        <form>
+            <label for="title">Title:</label><br>
+            <input ng-model="bPost.title" type="text" name="title" id="title"/><br>
+            <label for="textarea">New Post Content:</label><br>
+            <textarea ng-model="bPost.content" type="textarea" name="textarea" id="textarea"></textarea><br>
+            <input type="submit" ng-click="add(bPost)" id="submit" addvalue="Submit"/>
+        </form>
+    </div>
 </div>

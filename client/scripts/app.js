@@ -27,6 +27,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
             templateUrl: "/views/routes/blog.html",
             controller: "BlogController"
         }).
+        when('/code', {
+            templateUrl: "/views/routes/code.html"
+        }).
         when('/blogPost', {
             templateUrl: "/private/views/routes/blogPost.html"
         }).

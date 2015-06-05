@@ -40,21 +40,21 @@ a:hover, a:focus {
 }
 
 .jumbotron {
-    margin-top: 51px;
     margin-bottom: 0;
-    background-color: #536EA6;
+    background-color: #222222;
     color: #fff;
     overflow: auto;
     padding: 5px 60px 0 60px;
+    border-bottom: 2px solid #4e4e4e;
 }
 
 input, textarea {
     color: #000;
 }
 
-h1 {
-    margin-top: 60px;
-}
+/*h1 {*/
+    /*margin-top: 60px;*/
+/*}*/
 
 .left {
     float: left;
@@ -78,21 +78,57 @@ h1 {
 }
 
 .expRow {
-    border-bottom: 1px solid #4a4a4a;
+    border-bottom: 1px solid #4e4e4e;
 }
 
 .col4 {
     padding: 5px;
 }
 
-.kid1 {
-    margin-left: 12.7%;
+@media (max-width: 768px) {
+    .jumbotron {
+        margin-top: 91px;
+    }
+    .spacing {
+        margin-top: 101px;
+    }
 }
 
-.kid2 {
-    margin-left: 14%;
+@media (min-width: 769px) and (max-width: 1199px) {
+    .jumbotron {
+        margin-top: 51px;
+    }
+    .spacing {
+        margin-top: 61px;
+    }
 }
 
-.kid2a {
-    padding-left: 0;
+@media (min-width: 992px) {
+    .kid1 {
+        margin-left: 12.7%;
+    }
+    .kid2 {
+        margin-left: 14%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .jumbotron {
+        margin-top: 51px;
+    }
+    .spacing {
+        margin-top: 61px;
+    }
+    .kid1 {
+        margin-left: 12.7%;
+    }
+    .kid2 {
+        margin-left: 14%;
+    }
+}
+
+.eduC {
+    min-height: 120px;
+    border-left: 1px solid #4e4e4e;
+    margin-bottom: 10px;
 }

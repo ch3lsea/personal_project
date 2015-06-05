@@ -8,12 +8,15 @@
         <nav>
             <div class="navbar navbar-fixed-top">
                 <div class="container-fluid">
-                    <ul class="nav nav-pills">
+                    <ul class="nav nav-pills navbar-left">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#blog">Blog</a></li>
+                        <li><a href="#code">Code Bits</a></li>
                         <li ng-show="loggedin"><a href="#blogPost">Create New Post</a></li>
                         <li ng-show="!loggedin"><a href="#login">Log In</a></li>
                         <li ng-show="loggedin" ng-click="logout()" class="lastC"><a href="#/">Log Out</a></li>
+                    </ul>
+                    <ul class="nav nav-pills navbar-right">
                         <li class="lastC"><a href="mailto:chelsea.okey@gmail.com">Email Me</a></li>
                         <li><a target="_blank" href="https://www.linkedin.com/pub/chelsea-okey/84/88/309"><img
                                 src="/images/linkedin.svg"></a></li>

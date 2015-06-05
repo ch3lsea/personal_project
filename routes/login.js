@@ -8,7 +8,7 @@ router.post('/', passport.authenticate('local'), function(req, res) {
 });
 
 router.get('/loggedin', function(req, res) {
-    console.log('checking logged in');
+    console.log('checking log in');
     res.send(req.isAuthenticated() ? req.user : '0');
 });
 
