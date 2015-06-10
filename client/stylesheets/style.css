@@ -52,12 +52,7 @@ input, textarea {
     color: #000;
 }
 
-/*h1 {*/
-    /*margin-top: 60px;*/
-/*}*/
-
 .left {
-    float: left;
     padding-top: 0;
 }
 
@@ -67,7 +62,6 @@ input, textarea {
 
 .right {
     display: block;
-    float: right;
     padding-top: 1.4%;
     padding-bottom: 1.4%;
 }
@@ -79,6 +73,9 @@ input, textarea {
 
 .expRow {
     border-bottom: 1px solid #4e4e4e;
+}
+.contractExp {
+    padding-top: 0;
 }
 
 .col4 {
@@ -92,6 +89,10 @@ input, textarea {
     .spacing {
         margin-top: 101px;
     }
+    .right {
+        margin-left: 5%;
+        margin-bottom: 15px;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
@@ -101,6 +102,10 @@ input, textarea {
     .spacing {
         margin-top: 61px;
     }
+    .right {
+        margin-left: 5%;
+        margin-bottom: 15px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -109,6 +114,10 @@ input, textarea {
     }
     .kid2 {
         margin-left: 14%;
+    }
+    .right {
+        margin-left: 5%;
+        margin-bottom: 15px;
     }
 }
 
@@ -124,6 +133,12 @@ input, textarea {
     }
     .kid2 {
         margin-left: 14%;
+    }
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
     }
 }
 

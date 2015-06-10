@@ -6,4 +6,4 @@ var schema = new mongoose.Schema({
     date: {type: Date, default: Date.now()}
 });
 
-module.exports = mongoose.model('Schema', schema);
+module.exports = mongoose.model('blogPosts', schema);

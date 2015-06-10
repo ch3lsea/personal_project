@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //===========================================================
 //MongoDB Set-up
-var mongoURI = "mongodb://localhost:27017/personal_project";
+var mongoURI = "mongodb://chelseaokey:FLugzeug2988**@ds043082.mongolab.com:43082/personal_project";
 var MongoDB = mongoose.connect(mongoURI).connection;
 
 MongoDB.on('error', function (err) {
