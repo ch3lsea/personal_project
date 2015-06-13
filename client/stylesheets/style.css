@@ -33,11 +33,13 @@ ul {
 
 .nav li a:focus {
     background-color: #4e4e4e;
+    color: #337ab7;
 }
 
 .nav li a:hover{
     background-color: #5c5c5c;
     text-decoration: underline;
+    color: #337ab7;
 }
 
 a:hover, a:focus {
@@ -161,7 +163,7 @@ input, textarea {
     margin-top: 20px;
 }
 
-.panel-title a:hover, a:focus {
+.panel-title a:hover, .panel-title a:focus {
     color: #fff;
     text-decoration: none;
 }
