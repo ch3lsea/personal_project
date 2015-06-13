@@ -1,13 +1,14 @@
 <div class="spacing">
     <h1>Blog</h1>
     <h3>This page currently displays all content for the blog post. Soon it will display a bit of the content and will expand to display the full content when the user clicks on the title.</h3>
-    <div ng-repeat="bPost in posts | orderBy: '-date'" class="display col-md-8 col-md-offset-2 text-center">
-        <h3>{{bPost.title}}</h3>
-        <p>{{bPost.date | date: 'mediumDate'}}</p>
-        <p>{{bPost.content}}</p>
-        <div ng-show="loggedin">
-            <button class="btn">Edit</button>
-            <button class="btn">Delete</button>
-        </div>
-    </div>
+    <accordion ng-repeat="bPost in posts | orderBy: '-date'" class="display col-md-10 col-md-offset-1 text-center">
+        <accordion-group>
+            <accordion-heading><div><h3>{{bPost.title}}</h3><br>{{bPost.date | date: 'mediumDate'}}</div></accordion-heading>
+            {{bPost.content}}
+            <div ng-show="loggedin">
+                <button class="btn">Edit</button>
+                <button class="btn">Delete</button>
+            </div>
+        </accordion-group>
+    </accordion>
 </div>

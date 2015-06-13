@@ -41,6 +41,15 @@ module.exports = function(grunt) {
                 ],
                 "dest": "public/vendor"
             },
+            angularBootstrap: {
+                expand: true,
+                cwd: "node_modules",
+                src: [
+                    "angular-bootstrap/dist/ui-bootstrap.min.js",
+                    "angular-bootstrap/dist/ui-bootstrap-tpls.min.js"
+                ],
+                "dest": "public/vendor/"
+            },
             bootstrap: {
                 expand: true,
                 cwd: "node_modules",

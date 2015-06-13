@@ -1,5 +1,5 @@
-//var app = angular.module('app',["ngRoute", "ngResource"]);
-var app = angular.module('app',["ngRoute", "ngResource"]);//trying it without resource
+var app = angular.module('app',["ngRoute", "ngResource", 'appControllers', 'ui.bootstrap']);
+var appControllers = angular.module('appControllers', []);
 
 app.config(['$routeProvider', '$httpProvider', '$locationProvider',
     function($routeProvider, $httpProvider) {
@@ -28,7 +28,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
             controller: "BlogController"
         }).
         when('/code', {
-            templateUrl: "/views/routes/code.html"
+            templateUrl: "/views/routes/code.html",
+            controller: "AccordionCtrl"
         }).
         when('/blogPost', {
             templateUrl: "/private/views/routes/blogPost.html"
@@ -81,14 +82,22 @@ app.controller("BlogController", ['$scope', '$http', function($scope, $http){
             return response.data;
         })
     };
-
     fetchPosts();
-
     $scope.add = function(bPost){
         if(!$scope.bPost.title || !$scope.bPost.content) {
             alert("You missed a section there");
         } else {
             return $http.post('/posts', bPost).then(fetchPosts());
         }
+    };
+    $scope.status = {
+        isOpen: true,
+        isClosed: false
+    };
+}]);
+app.controller('AccordionCtrl', ['$scope', function ($scope) {
+    $scope.status = {
+        isOpen: true,
+        isClosed: false
     };
 }]);
