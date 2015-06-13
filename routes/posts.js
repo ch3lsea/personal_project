@@ -19,4 +19,12 @@ router.post("/", function(req,res,next){
   })
 });
 
+router.delete('/:id', function(req, res, next) {
+  console.log("Delete button route hit");
+  bPost.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(bPost);
+  });
+});
+
 module.exports = router;

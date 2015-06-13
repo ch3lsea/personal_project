@@ -90,6 +90,10 @@ app.controller("BlogController", ['$scope', '$http', function($scope, $http){
             return $http.post('/posts', bPost).then(fetchPosts());
         }
     };
+    $scope.delete = function(id){
+        console.log("Delete button client-side hit");
+        return $http.delete('/posts' + id).then(fetchPosts());
+    };
     $scope.status = {
         isOpen: true,
         isClosed: false

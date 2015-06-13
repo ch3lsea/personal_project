@@ -6,8 +6,7 @@
             <accordion-heading><div><h3>{{bPost.title}}</h3><br>{{bPost.date | date: 'mediumDate'}}</div></accordion-heading>
             {{bPost.content}}
             <div ng-show="loggedin">
-                <button class="btn">Edit</button>
-                <button class="btn">Delete</button>
+                <button class="btn" ng-click="delete(bPost._id)">Delete</button>
             </div>
         </accordion-group>
     </accordion>
