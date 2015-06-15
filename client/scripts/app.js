@@ -92,16 +92,15 @@ app.controller("BlogController", ['$scope', '$http', function($scope, $http){
     };
     $scope.delete = function(id){
         console.log("Delete button client-side hit");
+        console.log('/posts' + id);
         return $http.delete('/posts' + id).then(fetchPosts());
     };
     $scope.status = {
-        isOpen: true,
-        isClosed: false
+        isOpen: true
     };
 }]);
 app.controller('AccordionCtrl', ['$scope', function ($scope) {
     $scope.status = {
-        isOpen: true,
-        isClosed: false
+        isOpen: true
     };
 }]);
