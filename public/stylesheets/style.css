@@ -161,6 +161,7 @@ input, textarea {
 
 .panel-group {
     margin-top: 20px;
+    margin-bottom: 0;
 }
 
 .panel-title a:hover, .panel-title a:focus {
