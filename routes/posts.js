@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post("/", function(req,res,next){
+router.post('/posts', function(req,res,next){
   console.log("The post function works...? " + req.body);
   //check auth
   Schema.create(req.body, function(err, bPost){
