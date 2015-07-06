@@ -1,4 +1,4 @@
-<div class="spacing">
+<div class="spacing" ng-controller="BlogController">
     <h1>Blog</h1>
     <h3>This page currently displays all content for the blog post. Soon it will display a bit of the content and will expand to display the full content when the user clicks on the title.</h3>
     <accordion ng-repeat="bPost in posts | orderBy: '-date'" class="display col-md-10 col-md-offset-1 text-center">

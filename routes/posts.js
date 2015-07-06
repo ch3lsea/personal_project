@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post('/posts', function(req,res,next){
+router.post('/', function(req,res,next){
   console.log("The post function works...? " + req.body);
   //check auth
   Schema.create(req.body, function(err, bPost){
@@ -21,7 +21,7 @@ router.post('/posts', function(req,res,next){
 
 router.delete('/:id', function(req, res, next) {
   console.log("Delete button route hit");
-  bPost.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  Schema.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
