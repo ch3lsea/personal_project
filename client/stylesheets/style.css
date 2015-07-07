@@ -193,4 +193,5 @@ input, textarea {
 }
 pre {
     border: 1px solid #4e4e4e;
+    color: inherit;
 }
