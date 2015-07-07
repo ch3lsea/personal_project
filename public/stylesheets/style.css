@@ -191,3 +191,9 @@ input, textarea {
 .panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group {
     border-top: none;
 }
+pre {
+    background-color: #222222;
+    color: #fff;
+    margin-top: 10px;
+    border: 1px solid #4e4e4e;
+}
