@@ -194,8 +194,9 @@ input, textarea {
 pre {
     border: 1px solid #4e4e4e;
     color: inherit;
+    margin-top: 10px;
 }
 
-pre.prettyprint, code.prettyprint {
-    background-color: inherit !important;
-}
+/*pre.prettyprint, code.prettyprint {*/
+    /*background-color: inherit !important;*/
+/*}*/
