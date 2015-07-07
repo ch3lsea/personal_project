@@ -7,7 +7,120 @@
         <accordion-heading>
             <div>JavaScript</div>
         </accordion-heading>
-        Some JS Code
+        This is a code bit from a project I worked on to build a fruit trading game. The player starts off with a certain amount of money and can buy fruit with that money by clicking a "buy" button. Once they've purchased fruit, they can sell fruit using a "sell" button. The price of fruit is set randomly and changes from -25 cents to +25 cents every 15 seconds.
+        <pre class="prettyprint">
+function randomNumber(min, max) {
+	return Math.floor(Math.random() * (1 + max - min) + min);
+}
+
+function Fruit(name) {
+	this.name = name;
+	this.price = randomNumber(25, 999)/100;
+}
+
+Fruit.prototype.changePrice = function() {
+	this.price += randomNumber(-25,25)/100;
+	this.price = Math.round(this.price * 100)/100;
+	if(this.price > 9.99) {
+		this.price = 9.99;
+	} else if(this.price < 0.25) {
+		this.price = 0.25;
+	}
+};
+
+Fruit.prototype.display = function(){
+	var imgString = "&lt;img src='images/" + this.name + ".png'>&lt;/img>";
+	var string = "&lt;div>" + imgString + "&lt;br>$" + this.price + "</div>";
+	var button = "&lt;button class='btnBuy' value='" + this.name + "'>Buy&lt;/button>";
+	var buttonSell ="&lt;button class='btnSell' value='" + this.name + "'>Sell&lt;/button>";
+	var invString = "&lt;div>You have " + inventory[this.name] + "&lt;/div>";
+	var divWrapper = "&lt;div class='fruit'>" + string + button + buttonSell + invString + "&lt;/div>";
+	$("#container").append(divWrapper);
+};
+
+function PlayerInventory(array){
+	// Loop through the given array, creating a variable for the name of each property
+	for (var i = 0; i < array.length; i++) {
+		var name = array[i].name;
+		this[name] = 0;
+	}
+}
+
+function updateAll(){
+	$("#container").children().remove();
+	for(var i = 0; i < fruit.length; i++){
+		fruit[i].display();
+	}
+	$("#money").html("&lt;p>Your Money: $" + money + "&lt;/p>");
+}
+
+var money;
+var fruit;
+var inventory;
+
+function startMarket() {
+	$("#container").children().remove();
+	// Declare local variables: new fruit objects with random prices
+	var apple = new Fruit("apples");
+	var orange = new Fruit("oranges");
+	var banana = new Fruit("bananas");
+	var pear = new Fruit("pears");
+
+	// Intialize / reset global variables to the above
+	money = 50;
+	fruit = [apple, orange, banana, pear];
+	inventory = new PlayerInventory(fruit);
+}
+
+$(document).ready(function(){
+	$("#btnStart").on("click", function(){
+		// Initialize the app
+		startMarket();
+		// Display everything to start
+		updateAll();
+		// Set interval to 1500 -- 15 secs
+		setInterval(function() {
+			for (var i = 0; i < fruit.length; i++) {
+				fruit[i].changePrice();
+			}
+			updateAll();
+		}, 15000);
+	});
+$("#container").on("click", ".btnSell", function(){
+		updateAll();
+		// Loop through fruits array to check which fruit name the button was assigned
+		for (var i = 0; i < fruit.length; i++) {
+			if(fruit[i].name == this.value){
+				if(inventory[this.value] < 1){
+					alert("You don't have any " + this.value + " to sell!");
+					return;
+				}
+				inventory[this.value]--;
+				money += fruit[i].price;
+				money = Math.round(money * 100) / 100;
+				updateAll();
+			}
+		}
+	});
+
+	$("#container").on("click", ".btnBuy", function(){
+		inventory[this.value]++;
+		updateAll();
+		// Loop through fruits array to check which fruit name the button was assigned
+		for (var i = 0; i < fruit.length; i++) {
+			if(fruit[i].name == this.value){
+				if(money < fruit[i].price){
+					alert("You don't have enough cash to buy " + this.value +"!");
+					return;
+				}
+				money -= fruit[i].price;
+				money = Math.round(money * 100) / 100;
+				updateAll();
+			}
+		}
+	});
+});
+        </pre>
     </accordion-group>
     <accordion-group>
         <accordion-heading>
